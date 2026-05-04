@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOTE OF DKV | The Ultimate Supreme Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=Space+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff00bd;
+            --bg-deep: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-deep);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-animate {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%),
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            z-index: -2;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1300px; margin: auto;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 6px;
+        }
+
+        nav a {
+            text-decoration: none; color: #888; font-size: 0.55rem;
+            padding: 4px 8px; border-radius: 3px; border: 1px solid var(--border);
+            font-family: 'Space Mono', monospace; transition: 0.3s;
+        }
+
+        nav a:hover { color: #fff; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); border-color: white; }
+
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            position: relative; overflow: hidden; text-align: center;
+        }
+
+        .deco-circle {
+            position: absolute; width: 550px; height: 550px;
+            border: 1px dashed var(--neon-purple);
+            border-radius: 50%; opacity: 0.15;
+            animation: rotate 40s linear infinite;
+        }
+
+        .floating-label {
+            position: absolute; font-family: 'Space Mono'; font-size: 0.7rem;
+            color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px;
+            opacity: 0.8; z-index: 5;
+        }
+        .l1 { top: 30%; left: 8%; transform: rotate(-90deg); }
+        .l2 { bottom: 30%; right: 8%; transform: rotate(90deg); }
+        .l3 { top: 15%; right: 15%; color: var(--neon-pink); }
+        .l4 { bottom: 15%; left: 15%; color: var(--neon-purple); }
+
+        .hero h1 {
+            font-size: clamp(4rem, 20vw, 13rem);
+            font-weight: 900; line-height: 0.8; letter-spacing: -8px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 35px rgba(0, 242, 255, 0.3));
+            z-index: 2;
+        }
+
+        .hero-sub { margin-top: 20px; font-family: 'Space Mono'; font-size: 0.9rem; letter-spacing: 12px; color: var(--neon-blue); text-transform: uppercase; }
+
+        .ornament-line {
+            width: 2px; height: 100px; 
+            background: linear-gradient(transparent, var(--neon-pink), var(--neon-blue)); 
+            margin-top: 40px; opacity: 0.6;
+        }
+
+        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+        section { padding: 150px 0; border-bottom: 1px solid var(--border); }
+
+        .module-header { margin-bottom: 60px; }
+        .module-header span { color: var(--neon-pink); font-family: 'Space Mono'; font-weight: bold; border-left: 4px solid var(--neon-pink); padding-left: 15px; }
+        .module-header h2 { font-size: 4rem; text-transform: uppercase; margin-top: 15px; letter-spacing: -2px; }
+
+        .detail-box {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 45px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        h3 { color: var(--neon-blue); font-size: 1.8rem; margin-bottom: 15px; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        h4 { color: var(--neon-pink); margin-top: 25px; font-size: 1rem; text-transform: uppercase; font-family: 'Space Mono'; }
+        p { color: #aaa; margin-bottom: 15px; font-size: 1.05rem; text-align: justify; }
+        
+        ul { list-style: none; margin-top: 10px; }
+        li { position: relative; padding-left: 25px; margin-bottom: 12px; color: #eee; font-size: 0.95rem; }
+        li::before { content: '◈'; position: absolute; left: 0; color: var(--neon-blue); }
+
+        .tech-badge {
+            display: inline-block; padding: 4px 12px; background: rgba(0, 242, 255, 0.1);
+            color: var(--neon-blue); border-radius: 50px; font-size: 0.7rem;
+            font-family: 'Space Mono'; margin-right: 5px; margin-bottom: 10px; border: 1px solid var(--neon-blue);
+        }
+
+        .putu-credit {
+            margin: 60px 0;
+            padding: 15px 30px;
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            color: #fff;
+            border: 1px solid var(--neon-pink);
+            background: rgba(255, 0, 189, 0.05);
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255, 0, 189, 0.2);
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        footer { text-align: center; padding: 120px 20px; background: #000; border-top: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animate"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#m1">01. HISTORY</a> <a href="#m2">02. NIRMANA</a> <a href="#m3">03. TYPO</a> 
+            <a href="#m4">04. COLOR</a> <a href="#m5">05. GESTALT</a> <a href="#m6">06. LAYOUT</a> 
+            <a href="#m7">07. BRANDING</a> <a href="#m8">08. ILLUST</a> <a href="#m9">09. PHOTO</a> 
+            <a href="#m10">10. UI/UX</a> <a href="#m11">11. PROD</a> <a href="#m12">12. BIZ</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="deco-circle"></div>
+        <div class="floating-label l1">Visual Communication Design</div>
+        <div class="floating-label l2">Graphic Archive // 2026</div>
+        <div class="floating-label l3">Aesthetica Core Data</div>
+        <div class="floating-label l4">Creative Intelligence</div>
+        <h1>NOTE<br>OF DKV.</h1>
+        <p class="hero-sub">The Supreme Omega Encyclopedia</p>
+        <div class="ornament-line"></div>
+    </header>
+
+    <div class="container">
+
+        <section id="m1">
+            <div class="module-header"><span>MODULE 01</span><h2>History & Evolution</h2></div>
+            <div class="detail-box">
+                <h3>01. Sejarah Desain Komunikasi Visual</h3>
+                <p><strong>Pengertian:</strong> Studi mendalam mengenai evolusi representasi visual manusia, mulai dari simbol piktograf di dinding gua hingga revolusi desain digital berbasis AI saat ini.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Memahami konteks sosial dan teknologi di setiap era desain.</li><li>Mengidentifikasi karakteristik gaya visual dari berbagai pergerakan seni.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Membangun pondasi filosofis yang kuat dalam setiap karya.</li><li>Menghindari plagiarisme dan mampu memodifikasi gaya klasik menjadi modern.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Victorian</div> <div class="tech-badge">Arts & Crafts</div> <div class="tech-badge">Bauhaus</div> <div class="tech-badge">Swiss Style</div> <div class="tech-badge">Digitalism</div>
+            </div>
+        </section>
+
+        <section id="m2">
+            <div class="module-header"><span>MODULE 02</span><h2>Nirmana (Visual Logic)</h2></div>
+            <div class="detail-box">
+                <h3>02. Tata Rupa & Logika Visual</h3>
+                <p><strong>Pengertian:</strong> Pengorganisasian elemen-elemen rupa seperti titik, garis, bidang, warna, dan tekstur menjadi satu kesatuan komposisi yang harmonis dan bermakna secara visual.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Melatih kepekaan artistik dan insting komposisi mata desainer.</li><li>Menguasai teknik keseimbangan dan irama dalam bidang kosong.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Mampu memecahkan masalah tata letak yang paling kompleks sekalipun.</li><li>Meningkatkan nilai estetika objektif dalam setiap karya grafis.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Dwimatra (2D)</div> <div class="tech-badge">Trimatra (3D)</div> <div class="tech-badge">Gempal</div> <div class="tech-badge">Irama</div> <div class="tech-badge">Kesatuan</div>
+            </div>
+        </section>
+
+        <section id="m3">
+            <div class="module-header"><span>MODULE 03</span><h2>Typography Mastery</h2></div>
+            <div class="detail-box">
+                <h3>03. Seni Tata Huruf</h3>
+                <p><strong>Pengertian:</strong> Ilmu dan seni dalam memilih, menata, dan memodifikasi huruf agar pesan tertulis memiliki fungsi keterbacaan maksimal dan ekspresi visual yang tepat.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Membangun hirarki informasi agar audiens tahu apa yang harus dibaca duluan.</li><li>Menciptakan "mood" atau karakter brand hanya melalui bentuk tipografi.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Pesan tersampaikan secara psikologis bahkan sebelum teks dibaca.</li><li>Meningkatkan keterbacaan (Legibility) di berbagai perangkat media.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Anatomy</div> <div class="tech-badge">Kerning</div> <div class="tech-badge">Leading</div> <div class="tech-badge">Serif/Sans</div> <div class="tech-badge">Hierarchy</div>
+            </div>
+        </section>
+
+        <section id="m4">
+            <div class="module-header"><span>MODULE 04</span><h2>Color Science</h2></div>
+            <div class="detail-box">
+                <h3>04. Teori & Psikologi Warna</h3>
+                <p><strong>Pengertian:</strong> Studi tentang spektrum cahaya, pencampuran pigmen, serta dampak emosional dan psikologis yang ditimbulkan warna terhadap persepsi manusia.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Menciptakan harmoni dan kontras yang menarik perhatian audiens.</li><li>Membangun identitas visual yang konsisten di berbagai platform.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Mampu memanipulasi emosi pengguna.</li><li>Memastikan kualitas warna tetap sama dari layar hingga hasil cetak.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Color Wheel</div> <div class="tech-badge">RGB/CMYK</div> <div class="tech-badge">Analogous</div> <div class="tech-badge">Complementary</div>
+            </div>
+        </section>
+
+        <section id="m5">
+            <div class="module-header"><span>MODULE 05</span><h2>Gestalt Perception</h2></div>
+            <div class="detail-box">
+                <h3>05. Psikologi Persepsi Visual</h3>
+                <p><strong>Pengertian:</strong> Prinsip yang menjelaskan bagaimana otak manusia secara otomatis mengorganisir elemen-elemen visual yang terpisah menjadi satu kesatuan bentuk yang utuh.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Membuat desain yang pesannya mudah ditangkap secara instan oleh otak.</li><li>Memaksimalkan efektivitas penyampaian pesan melalui ilusi visual.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Mampu membuat logo cerdas menggunakan Negative Space.</li><li>Layout menjadi lebih logis dan tidak melelahkan mata pembaca.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Proximity</div> <div class="tech-badge">Similarity</div> <div class="tech-badge">Closure</div> <div class="tech-badge">Continuity</div>
+            </div>
+        </section>
+
+        <section id="m6">
+            <div class="module-header"><span>MODULE 06</span><h2>Layout & Grid System</h2></div>
+            <div class="detail-box">
+                <h3>06. Tata Letak Konten</h3>
+                <p><strong>Pengertian:</strong> Pengaturan posisi elemen visual dalam suatu bidang untuk menciptakan aliran informasi yang teratur dan sistematis.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Mengarahkan mata audiens melalui urutan informasi yang benar.</li><li>Menghindari kekacauan visual (clutter).</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Desain terlihat profesional dan mudah dipahami.</li><li>Mempercepat pengerjaan desain melalui sistem grid.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Golden Ratio</div> <div class="tech-badge">Rule of Thirds</div> <div class="tech-badge">Column Grid</div> <div class="tech-badge">Balance</div>
+            </div>
+        </section>
+
+        <section id="m7">
+            <div class="module-header"><span>MODULE 07</span><h2>Branding & Identity</h2></div>
+            <div class="detail-box">
+                <h3>07. Identitas Merk Grafis</h3>
+                <p><strong>Pengertian:</strong> Strategi visual untuk menciptakan "wajah" dan "kepribadian" sebuah entitas agar dapat dibedakan dan diingat oleh konsumen.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Membangun kredibilitas dan kepercayaan publik.</li><li>Mewujudkan visi-misi perusahaan ke dalam bentuk simbol.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Meningkatkan nilai ekonomi (Brand Equity).</li><li>Menciptakan keterikatan emosional antara brand dan pelanggan.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Logo Design</div> <div class="tech-badge">Brand Guidelines</div> <div class="tech-badge">Value</div> <div class="tech-badge">Supergraphic</div>
+            </div>
+        </section>
+
+        <section id="m8">
+            <div class="module-header"><span>MODULE 08</span><h2>Creative Illustration</h2></div>
+            <div class="detail-box">
+                <h3>08. Ilustrasi Kreatif</h3>
+                <p><strong>Pengertian:</strong> Hasil visualisasi dari suatu tulisan, ide, atau narasi dengan teknik gambar tangan maupun digital untuk memperjelas pesan.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Menyampaikan konsep abstrak yang tidak bisa dijelaskan dengan foto.</li><li>Memberikan sentuhan artistik unik.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Karya desain terasa lebih personal dan memiliki nyawa seni.</li><li>Membantu proses storytelling menjadi jauh lebih menarik.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Vector Art</div> <div class="tech-badge">Raster Art</div> <div class="tech-badge">Digital Painting</div> <div class="tech-badge">Composition</div>
+            </div>
+        </section>
+
+        <section id="m9">
+            <div class="module-header"><span>MODULE 09</span><h2>Creative Photography</h2></div>
+            <div class="detail-box">
+                <h3>09. Fotografi Komunikasi Visual</h3>
+                <p><strong>Pengertian:</strong> Proses penangkapan cahaya untuk menciptakan gambar yang mampu menceritakan sebuah narasi atau mendukung pesan desain.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Menghasilkan aset visual yang realistik dan berkualitas tinggi.</li><li>Mengatur atmosfir desain melalui teknik pencahayaan.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Desain memiliki tingkat kepercayaan tinggi.</li><li>Mampu mengarahkan emosi melalui ekspresi dan angle foto.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Exposure Triangle</div> <div class="tech-badge">Composition</div> <div class="tech-badge">Lighting</div> <div class="tech-badge">Color Grading</div>
+            </div>
+        </section>
+
+        <section id="m10">
+            <div class="module-header"><span>MODULE 10</span><h2>UI/UX Design</h2></div>
+            <div class="detail-box">
+                <h3>10. Desain Antarmuka & Pengalaman</h3>
+                <p><strong>Pengertian:</strong> Perancangan interaksi digital yang fokus pada kemudahan penggunaan (UX) dan keindahan visual (UI) aplikasi/website.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Menciptakan solusi digital yang intuitif.</li><li>Memaksimalkan kepuasan pengguna.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Meningkatkan loyalitas pengguna aplikasi.</li><li>Meminimalisir kesalahan input dan frustasi pengguna.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Wireframing</div> <div class="tech-badge">Prototyping</div> <div class="tech-badge">User Journey</div> <div class="tech-badge">Visual Design</div>
+            </div>
+        </section>
+
+        <section id="m11">
+            <div class="module-header"><span>MODULE 11</span><h2>Print & Production</h2></div>
+            <div class="detail-box">
+                <h3>11. Produksi & Teknik Cetak</h3>
+                <p><strong>Pengertian:</strong> Tahapan teknis untuk mewujudkan desain digital ke dalam bentuk fisik melalui berbagai metode cetak dan material.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Memahami batasan teknis antara layar dan media cetak.</li><li>Memilih material yang tepat untuk konsep desain.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Menghindari kegagalan warna dan presisi produksi.</li><li>Memberikan nilai tambah melalui teknik finishing.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Offset</div> <div class="tech-badge">Digital Print</div> <div class="tech-badge">Gramature</div> <div class="tech-badge">Finishing</div>
+            </div>
+        </section>
+
+        <section id="m12">
+            <div class="module-header"><span>MODULE 12</span><h2>Creative Business</h2></div>
+            <div class="detail-box">
+                <h3>12. Manajemen & Bisnis Desain</h3>
+                <p><strong>Pengertian:</strong> Pengelolaan aspek komersial dari kreativitas, mulai dari hak kekayaan intelektual hingga negosiasi jasa profesional.</p>
+                <div class="content-grid">
+                    <div><h4>Tujuan</h4><ul><li>Membangun karier desain yang berkelanjutan.</li><li>Melindungi hak cipta karya agar tidak disalahgunakan.</li></ul></div>
+                    <div><h4>Manfaat</h4><ul><li>Desainer memiliki posisi tawar yang kuat di hadapan klien.</li><li>Mampu mengelola project secara profesional.</li></ul></div>
+                </div>
+                <h4>Materi Inti:</h4>
+                <div class="tech-badge">Copyright</div> <div class="tech-badge">Pricing</div> <div class="tech-badge">Portfolio</div> <div class="tech-badge">Client Relations</div>
+            </div>
+        </section>
+
+        <div style="text-align: center;">
+            <div class="putu-credit">MADE BY PUTU</div>
+        </div>
+
+    </div>
+
+    <footer>
+        <h2 style="color: var(--neon-blue); letter-spacing: -2px; font-size: 2rem;">ULTIMATE ARCHIVE COMPLETE</h2>
+        <p style="font-family: 'Space Mono'; font-size: 0.7rem; margin-top: 15px; color: var(--neon-pink); opacity: 0.7;">
+            [ ALL 12 MODULES DEPLOYED // NO REDUCTION // 2026 ]
+        </p>
+    </footer>
+
+</body>
+</html>
